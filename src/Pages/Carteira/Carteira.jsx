@@ -157,7 +157,7 @@ function Carteira() {
                             </Grid>
                         </Grid>
                         <div id='footer-modal'>
-                            <Button variant="contained" color='danger' id='btn-modal'>Salvar</Button>           
+                            <Button variant="contained" color='danger' id='btn-modal'>Adicionar Despesa</Button>           
                         </div>
                     </Box>
                 </Modal>

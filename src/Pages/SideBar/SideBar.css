@@ -19,6 +19,7 @@
 #icone-exit{
     margin-top: 16px;
     margin-left: 5rem;
+    cursor: pointer;
 }
 #item-text{
     color: white;
