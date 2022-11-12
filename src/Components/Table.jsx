@@ -8,6 +8,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
+import { red } from '@material-ui/core/colors';
 
 
 const columns = [
@@ -92,7 +93,7 @@ export default function StickyHeadTable() {
                 <TableContainer className={classes.container}>
                     <Table stickyHeader aria-label="sticky table">
                         <TableHead>
-                            <TableRow>
+                            <TableRow >
                                 {columns.map((column) => (
                                     <TableCell
                                         key={column.id}
