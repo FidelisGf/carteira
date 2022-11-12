@@ -11,7 +11,9 @@ import TableRow from '@material-ui/core/TableRow';
 import { red } from '@material-ui/core/colors';
 import getExpensesList from '../Utils/ExpensesList.js'
 import moedaService from '../Service/moedaService';
-
+import EditIcon from '@mui/icons-material/Edit';
+import ClearIcon from '@mui/icons-material/Clear';
+import './Table.css'
 
 const columns = [
     {
@@ -45,7 +47,10 @@ const columns = [
         align: 'center',
     },
     {
+        id: 'actions',
         label: 'AÇÕES',
+        minWidth: 130,
+        align: 'center',
     },
 ];
 
@@ -130,6 +135,7 @@ export default function StickyHeadTable() {
                                             const value = row[column.id];
                                             return (
                                                 <TableCell key={column.id} align={column.align}>
+                                                    {column.id === 'actions' ? [<EditIcon id='table_icons'/>, <ClearIcon id='table_icons'/>] : null }
                                                     {column.format && typeof value === 'number' ? column.format(value) : value}
                                                 </TableCell>
                                             );
