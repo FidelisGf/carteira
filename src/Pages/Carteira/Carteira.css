@@ -4,7 +4,7 @@
 }
 
 #heade{
-    margin-top: 20px;
+    margin-top: 2.5rem;
     display: flex;
     justify-content: space-between;
     flex-direction: row;
@@ -12,23 +12,65 @@
     width: 100%;
 
 }
-#corpo-gastos{
-    background-color: aqua;
-    border-radius: 25px;
-    width: 200px;
-    text-align: center;
-    margin-left: 5vh;
+#grid-modal{
+    margin-left: 3rem;
+}
+#modal-carteira{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: 50%;
+    background-color: rgb(241, 240, 240);
+    border: '2px solid #000';
+    box-shadow: 24;
+    color: black;
     
 }
+#titulo-modal{
+    margin-left: 2rem;
+}
+#second-column{
+    margin-top: 2rem;
+}
+#corpo-gastos{
+    background-color: #A7FFEB;
+    border-radius: 20px;
+    width: 200px;
+    text-align: start;
+    margin-left: 5vh;
+    display: flex;
+    justify-content: start;
+
+    
+}
+#icone-gastos{
+    margin-top: 15px;
+    margin-left: 10px;
+}
 #btn-add{
-    border: none;
     cursor: pointer;
-    width: 120px;
-    border-radius: 100px;
-    background-color: aqua;
-    margin-right: 5vh;
+    margin-bottom: 15px;
+    margin-right: 10vh;
 }
 
 #table_div {
     margin-top: 1rem;
+    width: 100%;
+   
+}
+#corpo-table{
+    width: 90%;
+    margin-left: 3rem;
+}
+#footer-modal{
+    margin-top: 2rem;
+    display: flex;
+    justify-content: end;
+    margin-right: 2rem;
+}
+#btn-modal{
+    background-color: green !important;
+    color: white !important;
 }

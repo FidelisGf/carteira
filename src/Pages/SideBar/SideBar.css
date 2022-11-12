@@ -1,6 +1,31 @@
 #body-sidebar{
     width: 20%;
     height: 100vh;
-    background-color: black;
-    text-align: center;
+    background-color: black !important;
 }   
+#head-sidebar{
+    display: flex;
+    justify-content: start;
+    color: white;
+    margin-top: 2rem;
+}
+#icone-user{
+    margin-top: 15px;
+    margin-left:1rem;
+}
+#usuario{
+    margin-left: 2rem;
+}
+#icone-exit{
+    margin-top: 16px;
+    margin-left: 5rem;
+}
+#item-text{
+    color: white;
+    margin-left: 2rem;
+}
+#list-sidebar{
+    background-color: rgb(78, 78, 78);
+    display: flex;
+    justify-items: start;
+}

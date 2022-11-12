@@ -33,10 +33,23 @@
     cursor: pointer;
     height: 1.5rem;
     width: 4rem;
+    border-radius: 25px;
+    width: 100px;
+    height: 25px;
 }
 
 .login_btn:hover {
     border-color: white;
+}
+#email{
+    border-radius: 20px;
+    border: none;
+    height: 25px;
+}
+#password{
+    border-radius: 20px;
+    border: none;
+    height: 25px;
 }
 
 .login_title {
@@ -47,7 +60,7 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    margin-top: 2.5rem;
+    margin-top: 3.5rem;
 }
 
 input:invalid {
