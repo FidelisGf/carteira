@@ -6,6 +6,8 @@ import TextField from '@mui/material/TextField';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import * as React from 'react';
+import getExpensesList from '../../Utils/ExpensesList.js'
+
 
 import { Grid} from '@mui/material';
 function Carteira() {
@@ -77,16 +79,6 @@ function Carteira() {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    function getExpensesList() {
-        const expenses = localStorage.getItem('expenses')
-        if (expenses === null) {
-            return [];
-        }
-        else {
-            return JSON.parse(expenses);
-        }
-    }
-
     function saveExpense() {
         const value = document.getElementById('value').value
         const description = document.getElementById('description').value
@@ -94,6 +86,7 @@ function Carteira() {
         const expenses = getExpensesList()
         expenses.push(expense)
         localStorage.setItem('expenses', JSON.stringify(expenses))
+        handleClose()
     }
 
     return (

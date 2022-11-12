@@ -9,7 +9,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import { red } from '@material-ui/core/colors';
-
+import getExpensesList from '../Utils/ExpensesList.js'
 
 const columns = [
     {
@@ -25,13 +25,13 @@ const columns = [
         align: 'center'
     },
     {
-        id: 'coin',
+        id: 'currency',
         label: 'MOEDA',
         minWidth: 170,
         align: 'center',
     },
     {
-        id: 'paymentMethod',
+        id: 'payment',
         label: 'MÉTODO DE PAGAMENTO',
         minWidth: 170,
         align: 'center',
@@ -51,30 +51,7 @@ function createData(value, description, coin, paymentMethod, tag, actions = Elem
     return { value, description, coin, paymentMethod, tag, actions};
 }
 
-const rows = [
-    createData('600,00', 'Compras do mês', 'BRL', 'Cartão de Crédito', 'Alimentação',),
-    createData('200,00', 'Gasolina', 'BRL', 'Dinheiro', 'Transporte'),
-    createData('300,00', 'Passeio com familia', 'BRL', 'Cartão de Débito', 'Lazer'),
-    createData('200,00', 'Lanche', 'BRL', 'Cartão de Crédito', 'Alimentação'),
-    createData('100,00', 'Uber', 'BRL', 'Cartão de Crédito', 'Transporte'),
-    createData('50,00', 'Compras do mês', 'BRL', 'Dinheiro', 'Alimentação'),
-    createData('520,00', 'Compra bicicleta', 'BRL', 'Cartão de Crédito', 'Lazer'),
-    createData('1000,00', 'Compras do mês', 'BRL', 'Cartão de Crédito', 'Alimentação'),
-    createData('60,00', 'Compras do mês', 'BRL', 'Cartão de Crédito', 'Alimentação'),
-    createData('29,90', 'Uber', 'BRL', 'Cartão de Crédito', 'Transporte'),
-    createData('29,90', 'Uber', 'BRL', 'Cartão de Crédito', 'Transporte'),
-    createData('29,90', 'Uber', 'BRL', 'Cartão de Crédito', 'Transporte'),
-    createData('29,90', 'Uber', 'BRL', 'Cartão de Crédito', 'Transporte'),
-    createData('29,90', 'Uber', 'BRL', 'Cartão de Crédito', 'Transporte'),
-    createData('29,90', 'Uber', 'BRL', 'Cartão de Crédito', 'Transporte'),
-    createData('29,90', 'Uber', 'BRL', 'Cartão de Crédito', 'Transporte'),
-    createData('29,90', 'Uber', 'BRL', 'Cartão de Crédito', 'Transporte'),
-    createData('29,90', 'Uber', 'BRL', 'Cartão de Crédito', 'Transporte'),
-    createData('29,90', 'Uber', 'BRL', 'Cartão de Crédito', 'Transporte'),
-    createData('29,90', 'Uber', 'BRL', 'Cartão de Crédito', 'Transporte'),
-    createData('29,90', 'Uber', 'BRL', 'Cartão de Crédito', 'Transporte'),
-
-];
+const rows = getExpensesList()
 
 
 const useStyles = makeStyles({
