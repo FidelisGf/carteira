@@ -77,6 +77,25 @@ function Carteira() {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    function getExpensesList() {
+        const expenses = localStorage.getItem('expenses')
+        if (expenses === null) {
+            return [];
+        }
+        else {
+            return JSON.parse(expenses);
+        }
+    }
+
+    function saveExpense() {
+        const value = document.getElementById('value').value
+        const description = document.getElementById('description').value
+        const expense = {value, description, payment, currency, tag}
+        const expenses = getExpensesList()
+        expenses.push(expense)
+        localStorage.setItem('expenses', JSON.stringify(expenses))
+    }
+
     return (
        <section id='body-carteira'>
             <div id="heade">
@@ -100,7 +119,7 @@ function Carteira() {
                   
                         <Grid container spacing={1}>
                             <Grid id='grid-modal' item xs={4}>
-                                <TextField id="outlined-basic" label="Valor" variant="outlined" color="warning" placeholder='Valor' type={"number"}/>
+                                <TextField id="value" label="Valor" variant="outlined" color="warning" placeholder='Valor' type={"number"}/>
                             </Grid>
                             <Grid item xs={3}>
                                 <TextField
@@ -137,7 +156,7 @@ function Carteira() {
                         </Grid>
                         <Grid container spacing={2} id="second-column">
                             <Grid id='grid-modal' item xs={4}>
-                                <TextField id="outlined-basic" label="Descrição" variant="outlined" color="warning" placeholder='Descrição'/>
+                                <TextField id="description" label="Descrição" variant="outlined" color="warning" placeholder='Descrição'/>
                             </Grid>
                             <Grid item xs={4}>
                                 <TextField
@@ -157,7 +176,7 @@ function Carteira() {
                             </Grid>
                         </Grid>
                         <div id='footer-modal'>
-                            <Button variant="contained" color='danger' id='btn-modal'>Adicionar Despesa</Button>           
+                            <Button variant="contained" color='danger' id='btn-modal' onClick={saveExpense}>Adicionar Despesa</Button>           
                         </div>
                     </Box>
                 </Modal>
