@@ -47,10 +47,6 @@ const columns = [
     },
 ];
 
-function createData(value, description, coin, paymentMethod, tag, actions = Element) {
-    return { value, description, coin, paymentMethod, tag, actions};
-}
-
 const rows = getExpensesList()
 
 
@@ -59,7 +55,7 @@ const useStyles = makeStyles({
         width: '100%',
     },
     container: {
-        maxHeight: '39rem',
+        maxHeight: '37rem',
     },
 });
 

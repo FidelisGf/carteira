@@ -79,6 +79,11 @@ function Carteira() {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
+    function reloadPage() {
+        handleClose()
+        window.location.reload(false)
+    }
+
     function saveExpense() {
         const value = document.getElementById('value').value
         const description = document.getElementById('description').value
@@ -86,7 +91,7 @@ function Carteira() {
         const expenses = getExpensesList()
         expenses.push(expense)
         localStorage.setItem('expenses', JSON.stringify(expenses))
-        handleClose()
+        reloadPage()
     }
 
     return (
