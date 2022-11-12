@@ -19,7 +19,7 @@ function Carteira() {
           label: 'Reais',
         },
         {
-          value: 'DOL',
+          value: 'USD',
           label: 'Dolar',
         },
         {
@@ -30,7 +30,7 @@ function Carteira() {
     const payments = [
     {
         value: 'DINHEIRO',
-        label: 'A vista',
+        label: 'Dinheiro',
     },
     {
         value: 'CREDITO',
