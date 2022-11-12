@@ -9,46 +9,75 @@ import * as React from 'react';
 
 import { Grid} from '@mui/material';
 function Carteira() {
-  const [open, setOpen] = React.useState(false);
-  const [currency, setCurrency] = React.useState('EUR');
-  const [payment, setPayment] = React.useState('DINHEIRO');
-  const handleCurrency = (event: React.Change<HTMLInputElement>) => {
-        setCurrency(event.target.value);
-  };
-  const handlePayment = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setPayment(event.target.value)
-  };
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const currencies = [
+    const currencies = [
+        {
+          value: 'BRL',
+          label: 'Reais',
+        },
+        {
+          value: 'DOL',
+          label: 'Dolar',
+        },
+        {
+          value: 'EUR',
+          label: 'Euro',
+        }
+      ];
+    const payments = [
     {
-      value: 'BRL',
-      label: 'Reias',
+        value: 'DINHEIRO',
+        label: 'A vista',
     },
     {
-      value: 'DOL',
-      label: 'Dolar',
+        value: 'CREDITO',
+        label: 'Credito',
     },
     {
-      value: 'EUR',
-      label: 'Euro',
+        value: 'DEBITO',
+        label: 'Debito',
     }
-  ];
-  const payments = [
+    ];
+    const tags = [
     {
-      value: 'DINHEIRO',
-      label: 'A vista',
+        value: 'Alimentação',
+        label: 'Alimentação'
     },
     {
-      value: 'CREDITO',
-      label: 'Credito',
+        value: 'Lazer',
+        label: 'Lazer'
     },
     {
-      value: 'DEBITO',
-      label: 'Debito',
+        value: 'Trabalho',
+        label: 'Trabalho'
+    },
+    {
+        value: 'Trabalho',
+        label: 'Transporte'
+    },
+    {
+        value: 'Saúde',
+        label: 'Saúde'
+    },
+    ];
+
+    const [open, setOpen] = React.useState(false);
+    const [currency, setCurrency] = React.useState(currencies[0].value);
+    const [payment, setPayment] = React.useState(payments[0].value);
+    const [tag, setTag] = React.useState(tags[0].value)
+
+    const handleCurrency = (event: React.Change<HTMLInputElement>) => {
+            setCurrency(event.target.value);
+    };
+    const handlePayment = (event: React.ChangeEvent<HTMLInputElement>) => {
+            setPayment(event.target.value)
+    };
+    const handleTag = (event: React.ChangeEvent<HTMLInputElement>) => {
+            setTag(event.target.value)
     }
-  ];
-  return (
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
+    return (
        <section id='body-carteira'>
             <div id="heade">
                 <div id="corpo-gastos">
@@ -79,7 +108,7 @@ function Carteira() {
                                     select
                                     label="Metodo Pagamento"
                                     value={payment}
-                                    onChange={handleCurrency}
+                                    onChange={handlePayment}
                                     helperText="Metodo de Pagamento"
                                     >
                                     {payments.map((option) => (
@@ -95,7 +124,7 @@ function Carteira() {
                                         select
                                         label="Moeda"
                                         value={currency}
-                                        onChange={handlePayment}
+                                        onChange={handleCurrency}
                                         helperText="Please select your currency"
                                         >
                                         {currencies.map((option) => (
@@ -115,11 +144,11 @@ function Carteira() {
                                     id="outlined-select-currency"
                                     select
                                     label="Tags"
-                                    value={payment}
-                                    onChange={handleCurrency}
+                                    value={tag}
+                                    onChange={handleTag}
                                     helperText="Tags"
                                     >
-                                    {payments.map((option) => (
+                                    {tags.map((option) => (
                                         <MenuItem key={option.value} value={option.value}>
                                         {option.label}
                                         </MenuItem>
