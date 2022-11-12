@@ -10,8 +10,10 @@ import getExpensesList from '../../Utils/ExpensesList.js'
 
 
 import { Grid} from '@mui/material';
+
 function Carteira() {
-    const currencies = [
+  
+   const currencies = [
         {
           value: 'BRL',
           label: 'Reais',
@@ -61,12 +63,11 @@ function Carteira() {
         label: 'Saúde'
     },
     ];
-
     const [open, setOpen] = React.useState(false);
     const [currency, setCurrency] = React.useState(currencies[0].value);
     const [payment, setPayment] = React.useState(payments[0].value);
     const [tag, setTag] = React.useState(tags[0].value)
-
+    const vlTotal = parseFloat(localStorage.getItem('Total'))
     const handleCurrency = (event: React.Change<HTMLInputElement>) => {
             setCurrency(event.target.value);
     };
@@ -94,7 +95,7 @@ function Carteira() {
             <div id="heade">
                 <div id="corpo-gastos">
                     <AttachMoneyIcon id="icone-gastos" />
-                    <p><b>Gastos : R$ 300,00</b></p>
+                    <p><b>Gastos : {vlTotal.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})}</b></p>
                 </div>
                 <div>
                 <IconButton aria-label="add" style={{ color: "#A7FFEB"}} fontSize="100px" id='btn-add' onClick={handleOpen}>

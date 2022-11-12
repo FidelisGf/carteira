@@ -10,6 +10,8 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import { red } from '@material-ui/core/colors';
 import getExpensesList from '../Utils/ExpensesList.js'
+import moedaService from '../Service/moedaService';
+
 
 const columns = [
     {
@@ -62,7 +64,49 @@ const useStyles = makeStyles({
         maxHeight: '39rem',
     },
 });
+async function getCotacao(nmMoeda){
+    let vlCotacao = 0
+    let cotacao = await moedaService.get(nmMoeda)
+    let curre = cotacao.data
+    switch(nmMoeda){
+        case 'USD':
+            vlCotacao =  curre.USDBRL.bid  
+            break
+        case 'EUR':
+            console.log(curre.EURBRL.bid)
+            vlCotacao =  curre.EURBRL.bid    
+            break
+    }
+    return vlCotacao
+}    
+async function somaValores(){
+    let cotacaoDol = await getCotacao('USD')
+    let cotacaoEur = await getCotacao('EUR')
+    let vl = 0
+    let tmp = 0
+    let vlFinal = null
+    rows.forEach(async element => {
+        if(element.currency == 'BRL'){
+            vl += parseFloat(element.value)  
+            console.log('Chegou aqui')
+        }else{
+            if(element.currency == 'USD'){
+                let itemVl = parseFloat(element.value * cotacaoDol)
+                
+                vl += itemVl
+            }else{
+                let itemVl = parseFloat(element.value * cotacaoEur)
+                
+                vl += itemVl
+            }
+        }
+    });
 
+    vlFinal = (vl.toFixed(2).toString())
+    localStorage.setItem('Total', vlFinal)
+    return vl
+}
+const vlTotal = somaValores()
 export default function StickyHeadTable() {
     const classes = useStyles();
     return (
