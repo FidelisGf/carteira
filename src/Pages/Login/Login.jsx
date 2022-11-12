@@ -3,8 +3,6 @@ import './Login.css'
 function Login() {
   var email;
   var password;
-  var loginButton = document.getElementById("login_btn")
-
 
   function handleChange() {
       email = document.getElementById("email").value;
