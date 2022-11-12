@@ -4,12 +4,49 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #1E1E1E;
 }
 
-#login-card{
-    width: 300px;
-    height: 200px;
+#login_card{
+    width: 350px;
+    height: 350px;
     text-align: center;
-    background-color: black;
+    background-color: #424141;
     align-self: center;
+    border-radius: 30px;
+    
+}
+
+#login_field {
+    border-radius: 5px;
+    margin: 0.5rem;
+    height: 1.2rem;
+    width: 15rem;
+}
+
+#login_field:hover {
+    border-color: white;
+}
+
+#login_btn {
+    margin-top: 2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 1.5rem;
+    width: 4rem;
+}
+
+#login_btn:hover {
+    border-color: white;
+}
+
+#login_title {
+    color: white;
+}
+
+#login_form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 4rem;
 }
