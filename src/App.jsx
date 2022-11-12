@@ -2,8 +2,8 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './Pages/Login/Login'
-import SideBar from './Pages/Login/SideBar/SideBar';
-import Carteira from './Pages/Login/Carteira/Carteira';
+import SideBar from './Pages/SideBar/SideBar';
+import Carteira from './Pages/Carteira/Carteira';
 function App() {
   return (
     <BrowserRouter>
