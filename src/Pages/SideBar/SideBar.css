@@ -1,7 +1,7 @@
 #body-sidebar{
     width: 20%;
     height: 100vh;
-    background-color: black !important;
+    background-color: rgb(44, 44, 46) !important;
 }   
 #head-sidebar{
     display: flex;

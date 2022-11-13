@@ -9,8 +9,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import { red } from '@material-ui/core/colors';
-import getExpensesList from '../Utils/ExpensesList.js'
-import moedaService from '../Service/moedaService';
+import getExpensesList from '../../Utils/ExpensesList.js'
+import moedaService from '../../Service/moedaService';
 import EditIcon from '@mui/icons-material/Edit';
 import ClearIcon from '@mui/icons-material/Clear';
 import './Table.css'

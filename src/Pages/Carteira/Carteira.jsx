@@ -64,14 +64,14 @@ function Carteira() {
             let value = c.data[key]['code']
             let label = c.data[key]['name']
             label = label.slice(0, label.indexOf('/'))
-            const alreadExists = allCurrencies.some(obj => {
+            const alreadyExists = allCurrencies.some(obj => {
                 if (obj.value === value && obj.label === label) {
                     return true;
                 }
                 return false;
             })
 
-            if (!alreadExists) {
+            if (!alreadyExists) {
                 allCurrencies.push({value, label})
             }
         }
