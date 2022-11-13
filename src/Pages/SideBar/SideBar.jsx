@@ -4,7 +4,10 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 function SideBar() {
     function redirectLoginPage() {
-        window.location.href = "/"
+        const r = window.confirm('Realmente deseja sair?')
+        if (r) {
+            window.location.href = "/"
+        }
     }
 
     return (
