@@ -2,6 +2,7 @@ import './SideBar.css'
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+const user = localStorage.getItem('User')
 function SideBar() {
     function redirectLoginPage() {
         const r = window.confirm('Realmente deseja sair?')
@@ -14,7 +15,7 @@ function SideBar() {
         <aside id="body-sidebar">
             <div id='head-sidebar'>
                 <PermIdentityIcon id="icone-user" style={{ color: "white"}} />
-                <p id="usuario"><b>Fernando</b></p>
+                <p id="usuario"><b>{user}</b></p>
                 <ExitToAppIcon id="icone-exit" style={{ color: "red"}} onClick={redirectLoginPage}/>
             </div>
             <hr></hr>
