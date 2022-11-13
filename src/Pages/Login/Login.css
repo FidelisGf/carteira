@@ -23,8 +23,9 @@
     width: 15rem;
 }
 
+
 .login_field:hover {
-    border-color: white;
+    border-color: rgb(0, 0, 0);
 }
 
 .login_btn {
@@ -46,6 +47,7 @@
     border: none;
     height: 25px;
 }
+
 #password{
     border-radius: 20px;
     border: none;
@@ -61,6 +63,7 @@
     align-items: center;
     flex-direction: column;
     margin-top: 3.5rem;
+    color: black;
 }
 
 input:invalid {
