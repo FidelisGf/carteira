@@ -11,6 +11,8 @@ import { createTheme, ThemeProvider } from '@material-ui/core/styles'
 
 import moedaService from '../../Service/moedaService';
 
+
+
 import { createStyles, Grid} from '@mui/material';;
 const styles = theme => ({
     multilineColor:{
@@ -50,22 +52,26 @@ const CssTextField = withStyles({
       },
     },
 })(TextField);
+
+
 function Carteira() {
 
     const [currencies, setCurrencies] = React.useState([{}]);
-    (async function () {
+    async function  getCurrencies() {
         const c = await moedaService.getCurrencyList();
         let allCurrencies = []
         for (let key in c.data) {
             let value = c.data[key]['code']
             let label = c.data[key]['name']
             label = label.slice(0, label.indexOf('/'))
+            console.log(allCurrencies.indexOf({value, label}), {value, label})
             allCurrencies.push({value, label})
-
         }
         setCurrencies(allCurrencies)
-    })();
-
+    }
+    React.useEffect(() => {
+        getCurrencies();
+    }, []);
 
 
     const payments = [
