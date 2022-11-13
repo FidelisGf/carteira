@@ -55,11 +55,11 @@ const CssTextField = withStyles({
 
 
 function Carteira() {
-
-    const [currencies, setCurrencies] = React.useState([{}]);
+    const brlObject = {'value': 'BRL', 'label': 'Real Brasileiro'}
+    const [currencies, setCurrencies] = React.useState([brlObject]);
     async function  getCurrencies() {
         const c = await moedaService.getCurrencyList();
-        let allCurrencies = []
+        let allCurrencies = [brlObject]
         for (let key in c.data) {
             let value = c.data[key]['code']
             let label = c.data[key]['name']
