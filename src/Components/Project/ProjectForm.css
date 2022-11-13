@@ -1,0 +1,23 @@
+#titulo-modal{
+    margin-left: 2rem;
+}
+#modal-carteira{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 50%;
+    height: 50%;
+    background-color: rgb(226, 225, 225);
+    border: '2px solid #000';
+    box-shadow: 24;
+    color: rgb(53, 52, 52);
+}
+#footer-modal{
+    display: flex;
+    justify-content: end;
+    margin-right: 2rem;
+}
+#grid-modal{
+    margin-left: 3rem;
+}

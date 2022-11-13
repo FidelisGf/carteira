@@ -28,8 +28,7 @@ function App() {
         
         <Routes>
           <Route path='/' element={<Login />} />
-          <Route path='/wallet' element={<main id="main-conteudo"><SideBar /><Carteira/></main>}/>
-          
+          <Route path='/wallet' element={<main id="main-conteudo"><SideBar /><Carteira/></main>}/>          
         </Routes>
     
 

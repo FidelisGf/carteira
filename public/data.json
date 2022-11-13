@@ -1,0 +1,38 @@
+{
+  "payments": [
+    {
+      "value": "DINHEIRO",
+      "label": "Dinheiro"
+    },
+    {
+      "value": "CREDITO",
+      "label": "Credito"
+    },
+    {
+      "value": "DEBITO",
+      "label": "Debito"
+    }
+  ],
+  "tags": [
+    {
+      "value": "Alimentação",
+      "label": "Alimentação"
+    },
+    {
+      "value": "Lazer",
+      "label": "Lazer"
+    },
+    {
+      "value": "Trabalho",
+      "label": "Trabalho"
+    },
+    {
+      "value": "Trabalho",
+      "label": "Transporte"
+    },
+    {
+      "value": "Saúde",
+      "label": "Saúde"
+    }
+  ]
+}

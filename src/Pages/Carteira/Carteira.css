@@ -11,26 +11,9 @@
     align-items: baseline;
     width: 100%;
 }
-#grid-modal{
-    margin-left: 3rem;
-}
-#modal-carteira{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 50%;
-    height: 50%;
-    background-color: rgb(226, 225, 225);
-    border: '2px solid #000';
-    box-shadow: 24;
-    color: rgb(53, 52, 52);
-}
+
 #value{
     border-color: white !important;
-}
-#titulo-modal{
-    margin-left: 2rem;
 }
 #second-column{
     margin-top: 2rem;
@@ -64,11 +47,6 @@
 #corpo-table{
     width: 90%;
     margin-left: 3rem;
-}
-#footer-modal{
-    display: flex;
-    justify-content: end;
-    margin-right: 2rem;
 }
 #btn-modal{
     color: rgb(18, 104, 22) !important;
