@@ -49,7 +49,6 @@ const CssTextField = withStyles({
     },
 })(TextField);
 function Carteira() {
-  
    const currencies = [
         {
           value: 'BRL',
@@ -154,9 +153,7 @@ function Carteira() {
                         <Grid container spacing={1}>
                                 <Grid id='grid-modal' item xs={4}>
                                     <CssTextField   id="value" label="Valor" variant="outlined" color="secondary" placeholder='Valor' type={"number"} 
-                                    InputLabelProps={{
-                                        style: { color: '#fff' }, 
-                                     }}/>
+                                    />
                                 </Grid>  
                             <Grid item xs={3}>
                                 <CssTextField
@@ -166,9 +163,9 @@ function Carteira() {
                                     value={payment}
                                     onChange={handlePayment}
                                     helperText="Metodo de Pagamento"
-                                    InputProps={{
-                                        backgroundColor: "red"
-                                    }}
+                                   InputLabelProps={{
+                                        style: { color: '#fff' }, 
+                                     }}
                                     >
                                     {payments.map((option) => (
                                         <MenuItem key={option.value} value={option.value} >
@@ -202,9 +199,7 @@ function Carteira() {
                             <Grid id='grid-modal' item xs={4}>
                                 <CssTextField id="description" 
                                 label="Descrição" variant="outlined" color="secondary" placeholder='Descrição'
-                                InputLabelProps={{
-                                    style: { color: '#fff' }, 
-                                 }}
+                               
                                 />
                             </Grid>
                             <Grid item xs={4}>
