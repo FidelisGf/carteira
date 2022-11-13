@@ -133,9 +133,10 @@ function Carteira() {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     function reloadPage() {
-        handleClose()
+        window.alert('Despesa cadastrada com sucesso!')
         window.location.reload(false)
-    }
+    }   
+    
     function saveExpense() {
         const value = document.getElementById('value').value
         const description = document.getElementById('description').value
@@ -143,7 +144,8 @@ function Carteira() {
         const expenses = getExpensesList()
         expenses.push(expense)
         localStorage.setItem('expenses', JSON.stringify(expenses))
-        reloadPage()
+        handleClose()
+        setTimeout(reloadPage, 0.1 * 1000)
     }
    
     return (
