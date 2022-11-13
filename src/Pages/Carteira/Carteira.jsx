@@ -80,8 +80,6 @@ function Carteira() {
     React.useEffect(() => {
         getCurrencies();
     }, []);
-
-
     const payments = [
     {
         value: 'DINHEIRO',

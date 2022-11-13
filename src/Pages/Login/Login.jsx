@@ -31,6 +31,7 @@ function Login() {
   function handleLogin() {
       if (isValidEmail() && isValidPassword()) { 
         window.location.href = "/wallet"
+        localStorage.setItem('User', document.getElementById("email").value)
         localStorage.setItem('Login', 'Logado !')
       }
       else {

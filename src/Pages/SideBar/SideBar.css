@@ -14,11 +14,13 @@
     margin-left:1rem;
 }
 #usuario{
-    margin-left: 2rem;
+    margin-left: 1rem;
+    font-size: 11px;
+    margin-top: 20px;
 }
 #icone-exit{
     margin-top: 16px;
-    margin-left: 5rem;
+    margin-left: 1rem;
     cursor: pointer;
 }
 #item-text{

@@ -5,6 +5,8 @@ import Login from './Pages/Login/Login';
 import SideBar from './Pages/SideBar/SideBar';
 import Carteira from './Pages/Carteira/Carteira';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles'
+import { Redirect } from 'react-router-dom';
+import axios from "axios";
 const theme = createTheme({
     palette:{
       type: 'dark'
@@ -20,19 +22,14 @@ const theme = createTheme({
       }
     }
 })
-
 function App() {
   return (
     <ThemeProvider theme={theme}>
         <BrowserRouter>
-        
         <Routes>
           <Route path='/' element={<Login />} />
           <Route path='/wallet' element={<main id="main-conteudo"><SideBar /><Carteira/></main>}/>
-          
         </Routes>
-    
-
     </BrowserRouter>
     </ThemeProvider>
     

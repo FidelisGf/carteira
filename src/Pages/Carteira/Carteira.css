@@ -2,7 +2,6 @@
     width: 100%;
     background-color: #1E1E1E;
 }
-
 #heade{
     margin-top: 2.5rem;
     display: flex;
@@ -58,8 +57,7 @@
 }
 #table_div {
     margin-top: 1rem;
-    width: 100%;
-   
+    width: 100%;   
 }
 #corpo-table{
     width: 90%;
