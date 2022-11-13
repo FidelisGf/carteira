@@ -169,7 +169,7 @@ function Carteira() {
                   
                         <Grid container spacing={1}>
                                 <Grid id='grid-modal' item xs={4}>
-                                    <TextField id='value' label="Valor" variant="outlined" color="primary" placeholder='Valor' type={"number"} 
+                                    <TextField id='value' label="Valor" variant="outlined" color="primary" placeholder='Valor' type={"number"} defaultValue='0'
                                     />
                                 </Grid>  
                             <Grid item xs={3}>
@@ -218,7 +218,6 @@ function Carteira() {
                             <Grid id='grid-modal' item xs={4}>
                                 <TextField
                                 label="Descrição" id='description' variant="outlined" color="primary" placeholder='Descrição'
-                               
                                 />
                             </Grid>
                             <Grid item xs={4}>
