@@ -9,6 +9,10 @@ import * as React from 'react';
 import getExpensesList from '../../Utils/ExpensesList.js'
 import { createTheme, ThemeProvider } from '@material-ui/core/styles'
 
+import moedaService from '../../Service/moedaService';
+
+
+
 import { createStyles, Grid} from '@mui/material';;
 const styles = theme => ({
     multilineColor:{
@@ -48,22 +52,36 @@ const CssTextField = withStyles({
       },
     },
 })(TextField);
+
+
 function Carteira() {
-  
-   const currencies = [
-        {
-          value: 'BRL',
-          label: 'Reais',
-        },
-        {
-          value: 'USD',
-          label: 'Dolar',
-        },
-        {
-          value: 'EUR',
-          label: 'Euro',
+
+    const [currencies, setCurrencies] = React.useState([{}]);
+    async function  getCurrencies() {
+        const c = await moedaService.getCurrencyList();
+        let allCurrencies = []
+        for (let key in c.data) {
+            let value = c.data[key]['code']
+            let label = c.data[key]['name']
+            label = label.slice(0, label.indexOf('/'))
+            const alreadyExists = allCurrencies.some(obj => {
+                if (obj.value === value && obj.label === label) {
+                    return true;
+                }
+                return false;
+            })
+
+            if (!alreadyExists) {
+                allCurrencies.push({value, label})
+            }
         }
-      ];
+        setCurrencies(allCurrencies)
+    }
+    React.useEffect(() => {
+        getCurrencies();
+    }, []);
+
+
     const payments = [
     {
         value: 'DINHEIRO',
@@ -153,40 +171,40 @@ function Carteira() {
                   
                         <Grid container spacing={1}>
                                 <Grid id='grid-modal' item xs={4}>
-                                    <CssTextField   id="value" label="Valor" variant="outlined" color="secondary" placeholder='Valor' type={"number"} 
-                                    InputLabelProps={{
-                                        style: { color: '#fff' }, 
-                                     }}/>
+                                    <TextField id='value' label="Valor" variant="outlined" color="primary" placeholder='Valor' type={"number"} 
+                                    />
                                 </Grid>  
                             <Grid item xs={3}>
-                                <CssTextField
+                                <TextField
                                     id="outlined-select-currency"
                                     select
                                     label="Metodo Pagamento"
                                     value={payment}
+                                    color="primary"
                                     onChange={handlePayment}
                                     helperText="Metodo de Pagamento"
-                                    InputProps={{
-                                        backgroundColor: "red"
-                                    }}
+                                   InputLabelProps={{
+                                        style: { color: 'black' }, 
+                                     }}
                                     >
                                     {payments.map((option) => (
                                         <MenuItem key={option.value} value={option.value} >
                                         {option.label}
                                         </MenuItem>
                                     ))}
-                                </CssTextField>
+                                </TextField>
                             </Grid>
                             <Grid item xs={3}>
-                                <CssTextField
+                                <TextField
                                         id="outlined-select-currency"
                                         select
                                         label="Moeda"
+                                        color="primary"
                                         value={currency}
                                         onChange={handleCurrency}
                                         helperText="Please select your currency"
                                         InputLabelProps={{
-                                            style: { color: '#fff' }, 
+                                            style: { color: 'black' }, 
                                         }}
                                         sx={{ input: { color: 'red' } }}
                                         >
@@ -195,20 +213,18 @@ function Carteira() {
                                             {option.label}
                                             </MenuItem>
                                         ))}
-                                </CssTextField>
+                                </TextField>
                             </Grid>
                         </Grid>
                         <Grid container spacing={2} id="second-column">
                             <Grid id='grid-modal' item xs={4}>
-                                <CssTextField id="description" 
-                                label="Descrição" variant="outlined" color="secondary" placeholder='Descrição'
-                                InputLabelProps={{
-                                    style: { color: '#fff' }, 
-                                 }}
+                                <TextField
+                                label="Descrição" id='description' variant="outlined" color="primary" placeholder='Descrição'
+                               
                                 />
                             </Grid>
                             <Grid item xs={4}>
-                                <CssTextField
+                                <TextField
                                     id="outlined-select-currency"
                                     select
                                     label="Tags"
@@ -216,7 +232,7 @@ function Carteira() {
                                     onChange={handleTag}
                                     helperText="Tags"
                                     InputLabelProps={{
-                                        style: { color: '#fff' }, 
+                                        style: { color: 'black' }, 
                                      }}
                                     >
                                     {tags.map((option) => (
@@ -224,11 +240,11 @@ function Carteira() {
                                             {option.label}
                                         </MenuItem>
                                     ))}
-                                </CssTextField>
+                                </TextField>
                             </Grid>
                         </Grid>
                         <div id='footer-modal'>
-                            <Button variant="contained" color='danger' id='btn-modal' onClick={saveExpense}>Adicionar Despesa</Button>           
+                            <Button variant="text" id='btn-modal' onClick={saveExpense}>Adicionar Despesa</Button>           
                         </div>
                     </Box>
                 </Modal>

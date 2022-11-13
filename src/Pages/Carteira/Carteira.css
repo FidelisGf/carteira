@@ -21,14 +21,13 @@
     transform: translate(-50%, -50%);
     width: 50%;
     height: 50%;
-    background-color: rgb(56, 55, 55);
+    background-color: rgb(226, 225, 225);
     border: '2px solid #000';
     box-shadow: 24;
-    color: rgb(255, 255, 255);
+    color: rgb(53, 52, 52);
 }
 #value{
     border-color: white !important;
-    color: white !important;
 }
 #titulo-modal{
     margin-left: 2rem;
@@ -72,6 +71,5 @@
     margin-right: 2rem;
 }
 #btn-modal{
-    background-color: green !important;
-    color: white !important;
+    color: rgb(18, 104, 22) !important;
 }

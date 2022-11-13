@@ -78,44 +78,29 @@ const useStyles = makeStyles({
 async function getCotacao(nmMoeda){
     let vlCotacao = 0
     let cotacao = await moedaService.get(nmMoeda)
-    let curre = cotacao.data
-    switch(nmMoeda){
-        case 'USD':
-            vlCotacao =  curre.USDBRL.bid  
-            break
-        case 'EUR':
-            vlCotacao =  curre.EURBRL.bid    
-            break
+    for (let key in cotacao.data) {
+        vlCotacao = cotacao.data[key]['bid']
     }
     return vlCotacao
-}    
+} 
 async function somaValores(){
-    let cotacaoDol = await getCotacao('USD')
-    let cotacaoEur = await getCotacao('EUR')
     let vl = 0
-    let tmp = 0
     let vlFinal = null
     rows.forEach(async element => {
         if(element.currency == 'BRL'){
             vl += parseFloat(element.value)  
+            vlFinal = (vl.toFixed(2).toString())
+            localStorage.setItem('Total', vlFinal)
         }else{
-            if(element.currency == 'USD'){
-                let itemVl = parseFloat(element.value * cotacaoDol)
-                
-                vl += itemVl
-            }else{
-                let itemVl = parseFloat(element.value * cotacaoEur)
-                
-                vl += itemVl
-            }
+            let tmp = await getCotacao(element.currency)
+            vl += parseFloat(tmp * element.value) 
+            vlFinal = (vl.toFixed(2).toString())
+            localStorage.setItem('Total', vlFinal)
         }
     });
-
-    vlFinal = (vl.toFixed(2).toString())
-    localStorage.setItem('Total', vlFinal)
-    return vl
 }
-const vlTotal = somaValores()
+const vlTotalReais = somaValores()
+
 export default function StickyHeadTable() {
     const classes = useStyles();
     let counter = 0;
