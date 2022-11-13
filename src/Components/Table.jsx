@@ -56,6 +56,16 @@ const columns = [
 
 const rows = getExpensesList()
 
+function removeExpense(index) {
+    const i = index + 1
+    const r = window.confirm('Tem certeza que deseja remover a despesa ' + i + '?')
+    if (r) {
+        rows.splice(index, 1)
+        localStorage.setItem('expenses', JSON.stringify(rows))
+        window.location.reload(false)
+    }
+}
+
 
 const useStyles = makeStyles({
     root: {
@@ -74,7 +84,6 @@ async function getCotacao(nmMoeda){
             vlCotacao =  curre.USDBRL.bid  
             break
         case 'EUR':
-            console.log(curre.EURBRL.bid)
             vlCotacao =  curre.EURBRL.bid    
             break
     }
@@ -89,7 +98,6 @@ async function somaValores(){
     rows.forEach(async element => {
         if(element.currency == 'BRL'){
             vl += parseFloat(element.value)  
-            console.log('Chegou aqui')
         }else{
             if(element.currency == 'USD'){
                 let itemVl = parseFloat(element.value * cotacaoDol)
@@ -110,6 +118,7 @@ async function somaValores(){
 const vlTotal = somaValores()
 export default function StickyHeadTable() {
     const classes = useStyles();
+    let counter = 0;
     return (
             <Paper className={classes.root} style={{borderRadius: 5}}>
                 <TableContainer className={classes.container}>
@@ -128,14 +137,14 @@ export default function StickyHeadTable() {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {rows.map((row) => {
+                            {rows.map((row, counter) => {
                                 return (
-                                    <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                                    <TableRow hover role="checkbox" tabIndex={-1} key={rows.code}>
                                         {columns.map((column) => {
                                             const value = row[column.id];
                                             return (
                                                 <TableCell key={column.id} align={column.align}>
-                                                    {column.id === 'actions' ? [<EditIcon id='table_icons'/>, <ClearIcon id='table_icons'/>] : null }
+                                                    {column.id === 'actions' ? [<EditIcon id='table_icons'/>, <ClearIcon id='table_icons' onClick={() => removeExpense(counter)}/>] : null }
                                                     {column.format && typeof value === 'number' ? column.format(value) : value}
                                                 </TableCell>
                                             );
