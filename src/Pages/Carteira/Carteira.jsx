@@ -1,4 +1,4 @@
-import { Box, Button, IconButton, MenuItem, Modal } from '@material-ui/core';
+import { Box, Button, IconButton, MenuItem, Modal, withStyles } from '@material-ui/core';
 import './Carteira.css'
 import StickyHeadTable from '../../Components/Table';
 
@@ -7,10 +7,50 @@ import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import * as React from 'react';
 import getExpensesList from '../../Utils/ExpensesList.js'
+import { createTheme, ThemeProvider } from '@material-ui/core/styles'
 
+import { createStyles, Grid} from '@mui/material';;
+const CssTextField = withStyles({
+    root: {
+      '& label.Mui-focused': {
+        color: 'white',
+      },
+      '& .MuiInput-underline:after': {
+        borderBottomColor: 'yellow',
+      },
+      '& .MuiOutlinedInput-root': {
+        '& fieldset': {
+          borderColor: 'white',
+        },
+        '&:hover fieldset': {
+          borderColor: 'white',
+        },
+        '&.Mui-focused fieldset': {
+          borderColor: 'yellow',
+        },
+        "& .MuiFormLabel-root": {
+            color: 'white'
+        },
+        "& .MuiFormLabel-root.Mui-focused": {
+            color: 'primary.main'
+        },
+        'input': {
+            '&::placeholder': {
+              textOverflow: 'ellipsis !important',
+              color: 'blue'
+            }
+        }
+      },
+    },
+})(TextField);
 
-import { Grid} from '@mui/material';
-
+const styles = (theme: any) => createStyles({
+    input: {
+        '&::placeholder': {
+          fontStyle: 'italic',
+        },
+      },
+});    
 function Carteira() {
   
    const currencies = [
@@ -79,12 +119,10 @@ function Carteira() {
     }
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-
     function reloadPage() {
         handleClose()
         window.location.reload(false)
     }
-
     function saveExpense() {
         const value = document.getElementById('value').value
         const description = document.getElementById('description').value
@@ -94,7 +132,7 @@ function Carteira() {
         localStorage.setItem('expenses', JSON.stringify(expenses))
         reloadPage()
     }
-
+   
     return (
        <section id='body-carteira'>
             <div id="heade">
@@ -117,9 +155,12 @@ function Carteira() {
                     <h1 id='titulo-modal'>Cadastro de Despesa</h1>
                   
                         <Grid container spacing={1}>
-                            <Grid id='grid-modal' item xs={4}>
-                                <TextField id="value" label="Valor" variant="outlined" color="warning" placeholder='Valor' type={"number"}/>
-                            </Grid>
+                                <Grid id='grid-modal' item xs={4}>
+                                    <CssTextField   id="value" label="Valor" variant="outlined" color="secondary" placeholder='Valor' type={"number"} 
+                                    InputLabelProps={{
+                                        style: { color: '#fff' }, 
+                                     }}/>
+                                </Grid>  
                             <Grid item xs={3}>
                                 <TextField
                                     id="outlined-select-currency"
@@ -155,7 +196,7 @@ function Carteira() {
                         </Grid>
                         <Grid container spacing={2} id="second-column">
                             <Grid id='grid-modal' item xs={4}>
-                                <TextField id="description" label="Descrição" variant="outlined" color="warning" placeholder='Descrição'/>
+                                <TextField id="description" label="Descrição" variant="outlined" color="secondary" placeholder='Descrição'/>
                             </Grid>
                             <Grid item xs={4}>
                                 <TextField
