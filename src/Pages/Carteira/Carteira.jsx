@@ -1,6 +1,6 @@
 import { Box, Button, IconButton, MenuItem, Modal, withStyles } from '@material-ui/core';
 import './Carteira.css'
-import StickyHeadTable from '../../Components/Table';
+import StickyHeadTable from '../../Components/Table/Table';
 
 import TextField from '@mui/material/TextField';
 import ControlPointIcon from '@mui/icons-material/ControlPoint';
@@ -64,14 +64,14 @@ function Carteira() {
             let value = c.data[key]['code']
             let label = c.data[key]['name']
             label = label.slice(0, label.indexOf('/'))
-            const alreadyExists = allCurrencies.some(obj => {
+            const alreadExists = allCurrencies.some(obj => {
                 if (obj.value === value && obj.label === label) {
                     return true;
                 }
                 return false;
             })
 
-            if (!alreadyExists) {
+            if (!alreadExists) {
                 allCurrencies.push({value, label})
             }
         }
