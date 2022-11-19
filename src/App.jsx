@@ -8,6 +8,7 @@ import { createTheme, ThemeProvider } from '@material-ui/core/styles'
 import { store } from './store.js';
 import { Provider } from 'react-redux';
 import axios from "axios";
+
 const theme = createTheme({
     palette:{
       type: 'dark'

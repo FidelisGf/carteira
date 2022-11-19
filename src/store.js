@@ -21,7 +21,7 @@ const slice = createSlice({
 
 export const store = configureStore({
   reducer: {
-    wallet : slice.reducer
+    wallet: slice.reducer
   }
 });
 

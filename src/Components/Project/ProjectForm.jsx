@@ -7,6 +7,7 @@ import { createStyles, Grid } from "@mui/material";
 import getExpensesList from "../../Utils/ExpensesList.js";
 import * as React from "react";
 import moedaService from "../../Service/moedaService";
+import { addList, useAppDispatch } from "../../store";
 
 import {
   Box,
@@ -18,6 +19,7 @@ import {
 } from "@material-ui/core";
 
 function ProjectForm({ title, expenseId=null }) {
+  const dispatch = useAppDispatch();
 
   (function () {
     if (expenseId != null) {
@@ -85,18 +87,14 @@ function ProjectForm({ title, expenseId=null }) {
   };
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  function reloadPage() {
-    handleClose();
-    window.location.reload(false);
-  }
+
   function saveExpense() {
     const value = document.getElementById("value").value;
     const description = document.getElementById("description").value;
     const expense = { value, description, payment, currency, tag };
-    const expenses = getExpensesList();
-    expenses.push(expense);
-    localStorage.setItem("expenses", JSON.stringify(expenses));
-    reloadPage();
+
+    dispatch(addList(expense))
+    handleClose()
   }
   return (
     <Box id="modal-carteira" component="form">
