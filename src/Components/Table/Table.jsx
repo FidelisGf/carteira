@@ -14,7 +14,7 @@ import moedaService from '../../Service/moedaService';
 import EditIcon from '@mui/icons-material/Edit';
 import ClearIcon from '@mui/icons-material/Clear';
 import './Table.css'
-import { useAppSelector } from '../../store.js';
+import { useAppSelector, useAppDispatch, setValorTotal } from '../../store.js';
 
 
 const columns = [
@@ -75,28 +75,27 @@ async function getCotacao(nmMoeda){
     }
     return vlCotacao
 } 
-async function somaValores(){
-    let vl = 0
-    let vlFinal = null
-    rows.forEach(async element => {
-        if(element.currency == 'BRL'){
-            vl += parseFloat(element.value)  
-            vlFinal = (vl.toFixed(2).toString())
-            localStorage.setItem('Total', vlFinal)
-        }else{
-            let tmp = await getCotacao(element.currency)
-            vl += parseFloat(tmp * element.value) 
-            vlFinal = (vl.toFixed(2).toString())
-            localStorage.setItem('Total', vlFinal)
-        }
-    });
-}
-const vlTotalReais = somaValores()
 
 export default function StickyHeadTable() {
+    const dispatch = useAppDispatch();
     const state = useAppSelector((state) => state.wallet);
     rows = state.list
-
+    async function somaValores(){
+        console.log('Exe')
+        let vl = 0
+        let vlFinal = 0
+        for(let row of rows){
+            let tmp = await getCotacao(row.currency)
+            vl += parseFloat(tmp * row.value)
+        }
+        vlFinal = parseFloat(vl.toFixed(2))
+        dispatch(setValorTotal({
+            vlFinal
+        })) 
+    }
+    React.useEffect(() => {
+       somaValores()
+      }, []);
     function removeExpense(index) {
         const i = index + 1
         const r = window.confirm('Tem certeza que deseja remover a despesa ' + i + '?')
@@ -108,8 +107,6 @@ export default function StickyHeadTable() {
     }
     
     function editExpense(index) {
-
-
         localStorage.setItem(
             'editableId', index
         )
