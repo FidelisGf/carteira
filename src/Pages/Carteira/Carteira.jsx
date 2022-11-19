@@ -18,6 +18,7 @@ import ProjectForm from "../../Components/Project/ProjectForm";
 
 
 import { createStyles, Grid } from "@mui/material";
+import { store } from "../../store";
 const styles = (theme) => ({
   multilineColor: {
     color: "red",
@@ -55,7 +56,7 @@ function Carteira() {
           <p>
             <b>
               Gastos :{" "}
-              {vlTotal.toLocaleString("pt-br", {
+              {store.getState().wallet.valorTotal.toLocaleString("pt-br", {
                 style: "currency",
                 currency: "BRL",
               })}

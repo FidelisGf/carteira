@@ -7,7 +7,7 @@ import { createStyles, Grid } from "@mui/material";
 import getExpensesList from "../../Utils/ExpensesList.js";
 import * as React from "react";
 import moedaService from "../../Service/moedaService";
-import { addList, useAppDispatch } from "../../store";
+import { addList, useAppDispatch, useAppSelector, setValorTotal, store } from "../../store";
 
 import {
   Box,
@@ -20,7 +20,7 @@ import {
 
 function ProjectForm({ title, expenseId=null }) {
   const dispatch = useAppDispatch();
-
+  const state = useAppSelector((state) => state.wallet);
   (function () {
     if (expenseId != null) {
         const expense = getExpensesList()[expenseId]
@@ -53,11 +53,31 @@ function ProjectForm({ title, expenseId=null }) {
     }
     setCurrencies(allCurrencies);
   }
-  React.useEffect(() => {
-    getCurrencies();
-    getPaymentsAndTags();
-  }, []);
-
+  async function getCotacao(nmMoeda){
+    let vlCotacao = 0
+    let cotacao = await moedaService.get(nmMoeda)
+    for (let key in cotacao.data) {
+        vlCotacao = cotacao.data[key]['bid']
+    }
+    return vlCotacao
+  } 
+  async function somaValores(){
+    console.log('Exe')
+    let vl = 0
+    let rows = store.getState().wallet.list
+    console.log(rows)
+    let vlFinal = 0
+    for(let row of rows){
+        let tmp = await getCotacao(row.currency)
+        vl += parseFloat(tmp * row.value)
+        console.log(vl)
+    }
+    vlFinal = parseFloat(vl.toFixed(2))
+    dispatch(setValorTotal({
+        vlFinal
+    })) 
+  }
+  
   async function getPaymentsAndTags() {
     fetch("./data.json", {
       headers: {
@@ -71,6 +91,11 @@ function ProjectForm({ title, expenseId=null }) {
         setTags(res.tags);     
       });
   };
+  React.useEffect(() => {
+    getCurrencies();
+    getPaymentsAndTags();
+  }, []);
+
 
   const [open, setOpen] = React.useState(false);
   const [currency, setCurrency] = React.useState(currencies[0].value);
@@ -87,14 +112,16 @@ function ProjectForm({ title, expenseId=null }) {
   };
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  
 
-  function saveExpense() {
+ async  function saveExpense() {
     const value = document.getElementById("value").value;
     const description = document.getElementById("description").value;
     const expense = { value, description, payment, currency, tag };
-
     dispatch(addList(expense))
+    somaValores()
     handleClose()
+
   }
   return (
     <Box id="modal-carteira" component="form">

@@ -67,35 +67,11 @@ const useStyles = makeStyles({
         maxHeight: '37rem',
     },
 });
-async function getCotacao(nmMoeda){
-    let vlCotacao = 0
-    let cotacao = await moedaService.get(nmMoeda)
-    for (let key in cotacao.data) {
-        vlCotacao = cotacao.data[key]['bid']
-    }
-    return vlCotacao
-} 
 
 export default function StickyHeadTable() {
     const dispatch = useAppDispatch();
     const state = useAppSelector((state) => state.wallet);
     rows = state.list
-    async function somaValores(){
-        console.log('Exe')
-        let vl = 0
-        let vlFinal = 0
-        for(let row of rows){
-            let tmp = await getCotacao(row.currency)
-            vl += parseFloat(tmp * row.value)
-        }
-        vlFinal = parseFloat(vl.toFixed(2))
-        dispatch(setValorTotal({
-            vlFinal
-        })) 
-    }
-    React.useEffect(() => {
-       somaValores()
-      }, []);
     function removeExpense(index) {
         const i = index + 1
         const r = window.confirm('Tem certeza que deseja remover a despesa ' + i + '?')

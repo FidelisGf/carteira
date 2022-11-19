@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  valorTotal: null,
+  valorTotal: 0,
   list : []
 }
 
@@ -17,7 +17,7 @@ const slice = createSlice({
       state.list.splice(action.payload.index, 1);
     },
     setValorTotal: (state, action) => {
-      state.valorTotal = action.payload
+      state.valorTotal = action.payload.vlFinal
     }
   }
 });
