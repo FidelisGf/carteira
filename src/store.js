@@ -13,6 +13,9 @@ const slice = createSlice({
     addList: (state, action) => {
       state.list.push(action.payload);
     },
+    removeList:(state, action) => {
+      state.list.splice(action.payload.index, 1);
+    },
     setValorTotal: (state, action) => {
       state.valorTotal = action.payload
     }
@@ -25,7 +28,7 @@ export const store = configureStore({
   }
 });
 
-export const { addList, setValorTotal} = slice.actions;
+export const { addList, removeList, setValorTotal} = slice.actions;
 
 export const useAppDispatch = () => useDispatch();
 

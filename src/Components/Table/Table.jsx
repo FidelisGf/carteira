@@ -14,7 +14,7 @@ import moedaService from '../../Service/moedaService';
 import EditIcon from '@mui/icons-material/Edit';
 import ClearIcon from '@mui/icons-material/Clear';
 import './Table.css'
-import { useAppSelector } from '../../store.js';
+import { useAppSelector, removeList, useAppDispatch } from '../../store.js';
 
 
 const columns = [
@@ -94,6 +94,7 @@ async function somaValores(){
 const vlTotalReais = somaValores()
 
 export default function StickyHeadTable() {
+    const dispatch = useAppDispatch();
     const state = useAppSelector((state) => state.wallet);
     rows = state.list
 
@@ -101,15 +102,11 @@ export default function StickyHeadTable() {
         const i = index + 1
         const r = window.confirm('Tem certeza que deseja remover a despesa ' + i + '?')
         if (r) {
-            rows.splice(index, 1)
-            localStorage.setItem('expenses', JSON.stringify(rows))
-            window.location.reload(false)
+            dispatch(removeList({index}))
         }
     }
     
     function editExpense(index) {
-
-
         localStorage.setItem(
             'editableId', index
         )
