@@ -56,15 +56,7 @@ const columns = [
 
 const rows = getExpensesList()
 
-function removeExpense(index) {
-    const i = index + 1
-    const r = window.confirm('Tem certeza que deseja remover a despesa ' + i + '?')
-    if (r) {
-        rows.splice(index, 1)
-        localStorage.setItem('expenses', JSON.stringify(rows))
-        window.location.reload(false)
-    }
-}
+
 
 
 const useStyles = makeStyles({
@@ -102,6 +94,25 @@ async function somaValores(){
 const vlTotalReais = somaValores()
 
 export default function StickyHeadTable() {
+    function removeExpense(index) {
+        const i = index + 1
+        const r = window.confirm('Tem certeza que deseja remover a despesa ' + i + '?')
+        if (r) {
+            rows.splice(index, 1)
+            localStorage.setItem('expenses', JSON.stringify(rows))
+            window.location.reload(false)
+        }
+    }
+    
+    function editExpense(index) {
+
+
+        localStorage.setItem(
+            'editableId', index
+        )
+    }
+
+
     const classes = useStyles();
     let counter = 0;
     return (
@@ -129,7 +140,7 @@ export default function StickyHeadTable() {
                                             const value = row[column.id];
                                             return (
                                                 <TableCell key={column.id} align={column.align}>
-                                                    {column.id === 'actions' ? [<EditIcon id='table_icons'/>, <ClearIcon id='table_icons' onClick={() => removeExpense(counter)}/>] : null }
+                                                    {column.id === 'actions' ? [<EditIcon id='table_icons' onClick={() => editExpense(counter)}/>, <ClearIcon id='table_icons' onClick={() => removeExpense(counter)}/>] : null }
                                                     {column.format && typeof value === 'number' ? column.format(value) : value}
                                                 </TableCell>
                                             );

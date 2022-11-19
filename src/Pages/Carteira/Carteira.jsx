@@ -24,12 +24,28 @@ const styles = (theme) => ({
   },
 });
 
+
 function Carteira() {
   
   const vlTotal = parseFloat(localStorage.getItem("Total") ?? 0);
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false); 
+  const [editableId, setEditableId] = React.useState(null);
+
+
+
+  React.useEffect(() => {
+    (function () {
+      setEditableId(
+        JSON.parse(
+          localStorage.getItem(
+            'editableId'
+          )
+        )
+      )
+    })();
+  }, []);
 
   return (
     <section id="body-carteira">
@@ -64,7 +80,7 @@ function Carteira() {
           aria-describedby="modal-modal-description"
         >
           <ProjectForm
-            title="Cadastro de Despesas"                    
+            title="Cadastro de Despesas"
           />
         </Modal>
       </div>

@@ -17,7 +17,14 @@ import {
   withStyles,
 } from "@material-ui/core";
 
-function ProjectForm({ title }) {
+function ProjectForm({ title, expenseId=null }) {
+
+  (function () {
+    if (expenseId != null) {
+        const expense = getExpensesList()[expenseId]
+        console.log(expense)
+    }
+  })();
 
 
   const [currencies, setCurrencies] = React.useState([{}]);
@@ -58,7 +65,6 @@ function ProjectForm({ title }) {
     })
       .then(res => res.json())
       .then(function (res) {
-        console.log(res);
         setPayments(res.payments);
         setTags(res.tags);     
       });
@@ -104,6 +110,7 @@ function ProjectForm({ title }) {
             color="primary"
             placeholder="Valor"
             type={"number"}
+            defaultValue='0'
           />
         </Grid>
         <Grid item xs={3}>
