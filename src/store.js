@@ -28,7 +28,7 @@ export const store = configureStore({
   }
 });
 
-export const { addList, removeList, setValorTotal} = slice.actions;
+export const { addList, removeList, getFromList, setValorTotal} = slice.actions;
 
 export const useAppDispatch = () => useDispatch();
 

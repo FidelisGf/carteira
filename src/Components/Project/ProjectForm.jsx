@@ -7,7 +7,14 @@ import { createStyles, Grid } from "@mui/material";
 import getExpensesList from "../../Utils/ExpensesList.js";
 import * as React from "react";
 import moedaService from "../../Service/moedaService";
-import { addList, useAppDispatch, useAppSelector, setValorTotal, store } from "../../store";
+import {
+  addList,
+  useAppDispatch,
+  useAppSelector,
+  setValorTotal,
+  removeList,
+  store,
+} from "../../store";
 
 import {
   Box,
@@ -18,20 +25,26 @@ import {
   withStyles,
 } from "@material-ui/core";
 
-function ProjectForm({ title, expenseId=null }) {
+function ProjectForm({ title, expense, index, expenseId = null }) {
   const dispatch = useAppDispatch();
-  const state = useAppSelector((state) => state.wallet);
-  (function () {
-    if (expenseId != null) {
-        const expense = getExpensesList()[expenseId]
-        console.log(expense)
-    }
-  })();
-
-
   const [currencies, setCurrencies] = React.useState([{}]);
   const [payments, setPayments] = React.useState([{}]);
   const [tags, setTags] = React.useState([{}]);
+
+  const [open, setOpen] = React.useState(false);
+  const [currency, setCurrency] = React.useState(currencies[0].value);
+  const [payment, setPayment] = React.useState(payments[0].value);
+  const [tag, setTag] = React.useState(tags[0].value);
+  const [value, setValue] = React.useState(0);
+  const [description, setDescription] = React.useState("");
+
+  const state = useAppSelector((state) => state.wallet);
+  (function () {
+    if (expenseId != null) {
+      const expense = getExpensesList()[expenseId];
+      console.log(expense);
+    }
+  })();
 
   async function getCurrencies() {
     const c = await moedaService.getCurrencyList();
@@ -53,31 +66,45 @@ function ProjectForm({ title, expenseId=null }) {
     }
     setCurrencies(allCurrencies);
   }
-  async function getCotacao(nmMoeda){
-    let vlCotacao = 0
-    let cotacao = await moedaService.get(nmMoeda)
-    for (let key in cotacao.data) {
-        vlCotacao = cotacao.data[key]['bid']
+
+  function getExpense() {
+    if (expense != null && expense.value > 0) {
+      console.log(expense);
+      setCurrency(expense.currency);
+      setDescription(expense.description);
+      setValue(expense.value);
+      setPayment(expense.payment);
+      setTag(expense.tag);
     }
-    return vlCotacao
-  } 
-  async function somaValores(){
-    console.log('Exe')
-    let vl = 0
-    let rows = store.getState().wallet.list
-    console.log(rows)
-    let vlFinal = 0
-    for(let row of rows){
-        let tmp = await getCotacao(row.currency)
-        vl += parseFloat(tmp * row.value)
-        console.log(vl)
-    }
-    vlFinal = parseFloat(vl.toFixed(2))
-    dispatch(setValorTotal({
-        vlFinal
-    })) 
   }
-  
+
+  async function getCotacao(nmMoeda) {
+    let vlCotacao = 0;
+    let cotacao = await moedaService.get(nmMoeda);
+    for (let key in cotacao.data) {
+      vlCotacao = cotacao.data[key]["bid"];
+    }
+    return vlCotacao;
+  }
+  async function somaValores() {
+    console.log("Exe");
+    let vl = 0;
+    let rows = store.getState().wallet.list;
+    console.log(rows);
+    let vlFinal = 0;
+    for (let row of rows) {
+      let tmp = await getCotacao(row.currency);
+      vl += parseFloat(tmp * row.value);
+      console.log(vl);
+    }
+    vlFinal = parseFloat(vl.toFixed(2));
+    dispatch(
+      setValorTotal({
+        vlFinal,
+      })
+    );
+  }
+
   async function getPaymentsAndTags() {
     fetch("./data.json", {
       headers: {
@@ -85,22 +112,18 @@ function ProjectForm({ title, expenseId=null }) {
         Accept: "application/json",
       },
     })
-      .then(res => res.json())
+      .then((res) => res.json())
       .then(function (res) {
         setPayments(res.payments);
-        setTags(res.tags);     
+        setTags(res.tags);
       });
-  };
+  }
   React.useEffect(() => {
     getCurrencies();
     getPaymentsAndTags();
+    getExpense();
   }, []);
 
-
-  const [open, setOpen] = React.useState(false);
-  const [currency, setCurrency] = React.useState(currencies[0].value);
-  const [payment, setPayment] = React.useState(payments[0].value);
-  const [tag, setTag] = React.useState(tags[0].value);
   const handleCurrency = (event: React.Change<HTMLInputElement>) => {
     setCurrency(event.target.value);
   };
@@ -110,18 +133,23 @@ function ProjectForm({ title, expenseId=null }) {
   const handleTag = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTag(event.target.value);
   };
+  const handleValue = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(event.target.value);
+  };
+  const handleDescription = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setDescription(event.target.value);
+  };
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  
 
- async  function saveExpense() {
-    const value = document.getElementById("value").value;
-    const description = document.getElementById("description").value;
+  async function saveExpense() {
     const expense = { value, description, payment, currency, tag };
-    dispatch(addList(expense))
-    somaValores()
-    handleClose()
-
+    if (title == "Editar Despesa") {
+      dispatch(removeList({ index }));
+    }
+    dispatch(addList(expense));
+    somaValores();
+    handleClose();
   }
   return (
     <Box id="modal-carteira" component="form">
@@ -134,8 +162,10 @@ function ProjectForm({ title, expenseId=null }) {
             variant="outlined"
             color="primary"
             placeholder="Valor"
+            onChange={handleValue}
             type={"number"}
-            defaultValue='0'
+            value={value}
+            defaultValue="0"
           />
         </Grid>
         <Grid item xs={3}>
@@ -187,6 +217,8 @@ function ProjectForm({ title, expenseId=null }) {
             id="description"
             variant="outlined"
             color="primary"
+            onChange={handleDescription}
+            value={description}
             placeholder="Descrição"
           />
         </Grid>
@@ -194,12 +226,14 @@ function ProjectForm({ title, expenseId=null }) {
           <TextField
             id="outlined-select-currency"
             select
-            label="Tags"            
+            label="Tags"
             value={tag}
             onChange={handleTag}
-            helperText="Tags"            
+            helperText="Tags"
             InputLabelProps={{
-              style: { color: "black" },
+              style: {
+                color: "black",
+              },
             }}
           >
             {tags.map((option) => (
