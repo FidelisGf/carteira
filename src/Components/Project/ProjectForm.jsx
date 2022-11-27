@@ -80,8 +80,8 @@ function ProjectForm({ title, expense, index, expenseId = null }) {
   async function getCotacao(nmMoeda) {
     let vlCotacao = 0;
     let cotacao = await moedaService.get(nmMoeda);
-    for (let key in cotacao.data) {
-      vlCotacao = cotacao.data[key]["bid"];
+    for (let key in cotacao) {
+      vlCotacao = cotacao[key]["bid"];
     }
     return vlCotacao;
   }
