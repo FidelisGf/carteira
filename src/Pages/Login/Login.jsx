@@ -76,13 +76,13 @@ function Login() {
                     <span id="main_login_error" class="errors"></span>
 
                     <form class="login_form">
-                        <input type={"email"} placeholder="Email" class="login_field" id="email"></input>
+                        <input type={"email"} placeholder="Email" class="login_field" id="email" data-testid='email'></input>
                         <span id="emailError" class="errors"></span>
 
-                        <input type={"password"} placeholder="Senha" class="login_field" id="password" pattern="(?=.*[a-z])(?=.*[A-Z]).{8,}"></input>
+                        <input type={"password"} placeholder="Senha" class="login_field" id="password" pattern="(?=.*[a-z])(?=.*[A-Z]).{8,}" data-testid='password'></input>
                         <span id="passwordError" class="errors"></span>
 
-                        <input class="login_btn" id="login_btn" type="button" value="Entrar" onClick={handleLogin}></input>
+                        <input class="login_btn" id="login_btn" type="button" value="Entrar" onClick={handleLogin} data-testid='login_btn'></input>
                     </form>  
 
                 </div>
