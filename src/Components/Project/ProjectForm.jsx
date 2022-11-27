@@ -249,7 +249,7 @@ function ProjectForm({ title, expense, index, expenseId = null }) {
         </Grid>
       </Grid>
       <div id="footer-modal">
-        <Button variant="text" id="btn-modal" onClick={saveExpense}>
+        <Button variant="text" id="btn-modal" onClick={saveExpense} data-testid="saveexpense-id">
           Adicionar Despesa
         </Button>
       </div>

@@ -15,6 +15,40 @@ function renderWithProvider(element) {
   }
 
 describe('Tests usage of Carteira page', () => {
+  it("Should open modal", () => {
+    renderWithProvider(<Carteira />);
+
+    const openModalButton = screen.getByTestId("insertBtn");
+    fireEvent.click(openModalButton);
+
+    const inputPayment = screen.getAllByTestId('payment')[0];
+    expect(inputPayment).toBeInTheDocument();
+  });
+  
+  it("Should save expense", () => {
+    renderWithProvider(<Carteira />);
+
+    const openModalButton = screen.getByTestId("insertBtn");
+    fireEvent.click(openModalButton);
+    
+    const submitButton = screen.getByTestId("saveexpense-id");    
+    const inputDescription = screen.getByTestId('description');
+    const inputValue = screen.getByTestId('value');
+    const inputCoin = screen.getByTestId('currency');
+    const inputPayment = screen.getAllByTestId('payment')[0];
+    const inputTag = screen.getAllByTestId('tag')[0];
+
+    inputTag.value = 'Lazer';
+    inputPayment.value = 'Dinheiro';
+    inputCoin.value = 'USD';
+    inputDescription.value = 'descricao de teste' ;
+    inputValue.value = 10;
+
+    fireEvent.click(submitButton);
+    
+    expect(openModalButton).toBeInTheDocument();    
+  });
+
   it('Shoud get description input description', async () => {
     renderWithProvider(<Carteira />);
 
@@ -90,5 +124,5 @@ describe('Tests usage of Carteira page', () => {
     const getAmount = screen.getByTestId('amount');
 
     expect(getAmount).toBeInTheDocument();
-  });
+  }); 
 });
