@@ -51,7 +51,7 @@ function Carteira() {
   return (
     <section id="body-carteira" data-testid='wallet-page'>
       <div id="heade">
-        <div id="corpo-gastos">
+        <div id="corpo-gastos" data-testid='amount'>
           <AttachMoneyIcon id="icone-gastos" />
           <p>
             <b>
@@ -70,6 +70,7 @@ function Carteira() {
             fontSize="100px"
             id="btn-add"
             onClick={handleOpen}
+            data-testid='insertBtn'
           >
             <ControlPointIcon />
           </IconButton>

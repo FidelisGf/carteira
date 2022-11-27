@@ -165,6 +165,7 @@ function ProjectForm({ title, expense, index, expenseId = null }) {
             type={"number"}
             value={value}
             defaultValue="0"
+            data-testid='value'
           />
         </Grid>
         <Grid item xs={3}>
@@ -179,6 +180,7 @@ function ProjectForm({ title, expense, index, expenseId = null }) {
             InputLabelProps={{
               style: { color: "black" },
             }}
+            data-testid='payment'
           >
             {payments.map((option) => (
               <MenuItem key={option.value} value={option.value}>
@@ -200,6 +202,7 @@ function ProjectForm({ title, expense, index, expenseId = null }) {
               style: { color: "black" },
             }}
             sx={{ input: { color: "red" } }}
+            data-testid='currency'
           >
             {currencies.map((option) => (
               <MenuItem key={option.value} value={option.value}>
@@ -219,6 +222,7 @@ function ProjectForm({ title, expense, index, expenseId = null }) {
             onChange={handleDescription}
             value={description}
             placeholder="Descrição"
+            data-testid='description'
           />
         </Grid>
         <Grid item xs={4}>
@@ -229,6 +233,7 @@ function ProjectForm({ title, expense, index, expenseId = null }) {
             value={tag}
             onChange={handleTag}
             helperText="Tags"
+            data-testid='tag'
             InputLabelProps={{
               style: {
                 color: "black",
