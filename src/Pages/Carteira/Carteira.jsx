@@ -49,7 +49,7 @@ function Carteira() {
   }, []);
 
   return (
-    <section id="body-carteira">
+    <section id="body-carteira" data-testid='wallet-page'>
       <div id="heade">
         <div id="corpo-gastos">
           <AttachMoneyIcon id="icone-gastos" />

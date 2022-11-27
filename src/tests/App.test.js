@@ -12,8 +12,18 @@ describe('Testing app routes', () => {
       
         render(<App />);
       
-        const loginPage = screen.getByTestId('login-page');
+        const page = screen.getByTestId('login-page');
       
-        expect(loginPage).toBeInTheDocument();
-      });
+        expect(page).toBeInTheDocument();
+    });
+
+    it('Should render Wallet Page when the path is /wallet', () => {
+        window.history.pushState({}, 'Wallet Page', '/wallet');
+      
+        render(<App />);
+      
+        const page = screen.getByTestId('wallet-page');
+      
+        expect(page).toBeInTheDocument();
+    });
 })
