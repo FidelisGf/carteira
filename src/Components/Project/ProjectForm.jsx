@@ -42,16 +42,15 @@ function ProjectForm({ title, expense, index, expenseId = null }) {
   (function () {
     if (expenseId != null) {
       const expense = getExpensesList()[expenseId];
-      console.log(expense);
     }
   })();
 
   async function getCurrencies() {
-    const c = await moedaService.getCurrencyList();
+    const c = await (await moedaService.getCurrencyList());
     let allCurrencies = [];
-    for (let key in c.data) {
-      let value = c.data[key]["code"];
-      let label = c.data[key]["name"];
+    for (let key in c) {
+      let value = c[key]["code"];
+      let label = c[key]["name"];
       label = label.slice(0, label.indexOf("/"));
       const alreadyExists = allCurrencies.some((obj) => {
         if (obj.value === value && obj.label === label) {

@@ -69,7 +69,7 @@ function Login() {
   window.addEventListener('keyup', handleChange)
 
   return (
-        <main class="main">
+        <main class="main" data-testid='login-page'>
                 <div class="login_card">
 
                     <h2 class="login_title">Carteira Digital</h2>
