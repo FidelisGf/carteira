@@ -2,6 +2,7 @@ import { fireEvent, getByText, render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import Carteira from '../Pages/Carteira/Carteira';
+import Table from '../Components/Table/Table'
 import { store } from '../store';
 
 function renderWithProvider(element) {
@@ -44,9 +45,18 @@ describe('Tests usage of Carteira page', () => {
     inputDescription.value = 'descricao de teste' ;
     inputValue.value = 10;
 
+
     fireEvent.click(submitButton);
     
     expect(openModalButton).toBeInTheDocument();    
+  });
+  it("Should delete expense", () => {
+    renderWithProvider(<Table />);
+    const deleteButton = screen.getByTestId('table_delete');
+    fireEvent.click(deleteButton);
+
+    !expect(deleteButton).toBeInTheDocument
+    
   });
 
   it('Shoud get description input description', async () => {

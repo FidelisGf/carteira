@@ -135,6 +135,7 @@ export default function StickyHeadTable() {
                               />,
                               <ClearIcon
                                 id="table_icons"
+                                data-testid='table_delete'
                                 onClick={() => removeExpense(counter)}
                               />,
                             ]
