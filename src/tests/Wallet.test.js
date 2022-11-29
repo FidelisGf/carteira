@@ -58,7 +58,19 @@ describe('Tests usage of Carteira page', () => {
     !expect(deleteButton).toBeInTheDocument
     
   });
+  it("Should edit expense", () => {
+    renderWithProvider(<Table />);
+    const editButton = screen.getByTestId('table_edit');
+    fireEvent.click(editButton);
 
+    const submitButton = screen.getByTestId("saveexpense-id");    
+    const inputDescription = screen.getByTestId('description');
+    inputDescription.value = 'nova descricao';
+
+    !expect(editButton).toBeInTheDocument
+    fireEvent.click(submitButton);
+    !expect(submitButton).toBeInTheDocument
+  });
   it('Shoud get description input description', async () => {
     renderWithProvider(<Carteira />);
 

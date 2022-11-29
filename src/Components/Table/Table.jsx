@@ -131,6 +131,7 @@ export default function StickyHeadTable() {
                           ? [
                               <EditIcon
                                 id="table_icons"
+                                data-testid="table_edit"
                                 onClick={() => editExpense(counter)}
                               />,
                               <ClearIcon
