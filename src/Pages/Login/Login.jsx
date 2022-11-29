@@ -28,18 +28,21 @@ function Login() {
 
   }
 
-  function handleLogin() {
+  function handleLogin() {         
+    email = document.getElementById("email").value;
+    password = document.getElementById("password").value;
       if (isValidEmail() && isValidPassword()) { 
         window.location.href = "/wallet"
         localStorage.setItem('Login', 'Logado !')
       }
       else {
-        addErrorMsg("Usuario ou Senha Invalido", "main_login_error")
+        addErrorMsg("Usuario ou Senha Invalido", "main_login_error");
+        handleChange();       
       }
   }
 
   function addErrorMsg(msg, tagId, useTimeout=true) {
-      document.getElementById(tagId).innerText = msg;
+      document.getElementById(tagId).innerText  = msg;
       if (useTimeout) {
           setTimeout(cleanErrorMsg, 2 * 1000, tagId)
       }
@@ -77,10 +80,10 @@ function Login() {
 
                     <form class="login_form">
                         <input type={"email"} placeholder="Email" class="login_field" id="email" data-testid='email'></input>
-                        <span id="emailError" class="errors"></span>
+                        <span data-testid="emailError-id" id="emailError" class="errors"></span>
 
                         <input type={"password"} placeholder="Senha" class="login_field" id="password" pattern="(?=.*[a-z])(?=.*[A-Z]).{8,}" data-testid='password'></input>
-                        <span id="passwordError" class="errors"></span>
+                        <span data-testid="passwordError-id" id="passwordError" class="errors"></span>
 
                         <input class="login_btn" id="login_btn" type="button" value="Entrar" onClick={handleLogin} data-testid='login_btn'></input>
                     </form>  

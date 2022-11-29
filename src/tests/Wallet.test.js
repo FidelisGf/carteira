@@ -64,7 +64,7 @@ describe('Tests usage of Carteira page', () => {
     fireEvent.click(editButton);
 
     const submitButton = screen.getByTestId("saveexpense-id");    
-    const inputDescription = screen.getByTestId('description');
+    const inputDescription = screen.getByTestId('description'); 
     inputDescription.value = 'nova descricao';
 
     !expect(editButton).toBeInTheDocument
