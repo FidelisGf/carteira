@@ -82,7 +82,6 @@ export default function StickyHeadTable() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const state = useAppSelector((state) => state.wallet);
-  console.log(state.list);
   rows = state.list;
   function removeExpense(index) {
     const i = index + 1;
@@ -132,10 +131,12 @@ export default function StickyHeadTable() {
                           ? [
                               <EditIcon
                                 id="table_icons"
+                                data-testid="table_edit"
                                 onClick={() => editExpense(counter)}
                               />,
                               <ClearIcon
                                 id="table_icons"
+                                data-testid='table_delete'
                                 onClick={() => removeExpense(counter)}
                               />,
                             ]

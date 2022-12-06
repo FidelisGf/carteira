@@ -42,16 +42,15 @@ function ProjectForm({ title, expense, index, expenseId = null }) {
   (function () {
     if (expenseId != null) {
       const expense = getExpensesList()[expenseId];
-      console.log(expense);
     }
   })();
 
   async function getCurrencies() {
-    const c = await moedaService.getCurrencyList();
+    const c = await (await moedaService.getCurrencyList());
     let allCurrencies = [];
-    for (let key in c.data) {
-      let value = c.data[key]["code"];
-      let label = c.data[key]["name"];
+    for (let key in c) {
+      let value = c[key]["code"];
+      let label = c[key]["name"];
       label = label.slice(0, label.indexOf("/"));
       const alreadyExists = allCurrencies.some((obj) => {
         if (obj.value === value && obj.label === label) {
@@ -81,8 +80,8 @@ function ProjectForm({ title, expense, index, expenseId = null }) {
   async function getCotacao(nmMoeda) {
     let vlCotacao = 0;
     let cotacao = await moedaService.get(nmMoeda);
-    for (let key in cotacao.data) {
-      vlCotacao = cotacao.data[key]["bid"];
+    for (let key in cotacao) {
+      vlCotacao = cotacao[key]["bid"];
     }
     return vlCotacao;
   }
@@ -166,6 +165,7 @@ function ProjectForm({ title, expense, index, expenseId = null }) {
             type={"number"}
             value={value}
             defaultValue="0"
+            data-testid='value'
           />
         </Grid>
         <Grid item xs={3}>
@@ -180,6 +180,7 @@ function ProjectForm({ title, expense, index, expenseId = null }) {
             InputLabelProps={{
               style: { color: "black" },
             }}
+            data-testid='payment'
           >
             {payments.map((option) => (
               <MenuItem key={option.value} value={option.value}>
@@ -201,6 +202,7 @@ function ProjectForm({ title, expense, index, expenseId = null }) {
               style: { color: "black" },
             }}
             sx={{ input: { color: "red" } }}
+            data-testid='currency'
           >
             {currencies.map((option) => (
               <MenuItem key={option.value} value={option.value}>
@@ -220,6 +222,7 @@ function ProjectForm({ title, expense, index, expenseId = null }) {
             onChange={handleDescription}
             value={description}
             placeholder="Descrição"
+            data-testid='description'
           />
         </Grid>
         <Grid item xs={4}>
@@ -230,6 +233,7 @@ function ProjectForm({ title, expense, index, expenseId = null }) {
             value={tag}
             onChange={handleTag}
             helperText="Tags"
+            data-testid='tag'
             InputLabelProps={{
               style: {
                 color: "black",
@@ -245,7 +249,7 @@ function ProjectForm({ title, expense, index, expenseId = null }) {
         </Grid>
       </Grid>
       <div id="footer-modal">
-        <Button variant="text" id="btn-modal" onClick={saveExpense}>
+        <Button variant="text" id="btn-modal" onClick={saveExpense} data-testid="saveexpense-id">
           Adicionar Despesa
         </Button>
       </div>

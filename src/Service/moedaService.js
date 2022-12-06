@@ -1,11 +1,10 @@
-import axios from "axios"
-
 export default{
     get($moeda){
-        return axios.get('http://economia.awesomeapi.com.br/json/last/' + $moeda + '-BRL')
+        return fetch('http://economia.awesomeapi.com.br/json/last/' + $moeda + '-BRL').then(response => response.json())
     },
 
     getCurrencyList() {
-        return axios.get('https://economia.awesomeapi.com.br/json/all')
+        return fetch('https://economia.awesomeapi.com.br/json/all').then(response => response.json())
     }
 }
+
