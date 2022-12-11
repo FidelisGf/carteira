@@ -22,3 +22,4 @@ O projeto “Carteira Digital” terá em sua essência a preservação de uma b
 
 5. Casos de Uso
  
+<img src="https://user-images.githubusercontent.com/78619818/206927314-e66d2b93-6964-40f2-9e2e-1297c61d9905.png">
