@@ -17,6 +17,7 @@ O projeto “Carteira Digital” terá em sua essência a preservação de uma b
 
 
 3. Visão Geral
+<img src="https://user-images.githubusercontent.com/83375130/206932967-884597c3-6c28-46b8-a1fc-4f013e97da81.png">
 
 4. Mecanismos arquiteturais
 
